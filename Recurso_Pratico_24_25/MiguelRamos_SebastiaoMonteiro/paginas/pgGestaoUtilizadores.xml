@@ -5,7 +5,7 @@
     <nomeUtilizador>admin</nomeUtilizador>
     <tipoUtilizador>administrador</tipoUtilizador>
     <email>admin@ipcb.pt</email>
-    <eliminar link="eliminaUtilizador.php?nomeUtilizador=admin&amp;amp;tipoUtilizador=administrador">ELIMINAR</eliminar>
+    <eliminar link="eliminaUtilizador.php?nomeUtilizador=admin&amp;tipoUtilizador=administrador">ELIMINAR</eliminar>
     <editar link="pgEditaUtilizador.php?id=1">EDITAR</editar>
   </utilizador>
   <utilizador>
@@ -13,7 +13,7 @@
     <nomeUtilizador>docente</nomeUtilizador>
     <tipoUtilizador>docente</tipoUtilizador>
     <email>docente@ipcb.pt</email>
-    <eliminar link="eliminaUtilizador.php?nomeUtilizador=docente&amp;amp;tipoUtilizador=docente">ELIMINAR</eliminar>
+    <eliminar link="eliminaUtilizador.php?nomeUtilizador=docente&amp;tipoUtilizador=docente">ELIMINAR</eliminar>
     <editar link="pgEditaUtilizador.php?id=2">EDITAR</editar>
   </utilizador>
   <utilizador>
@@ -21,7 +21,7 @@
     <nomeUtilizador>aluno</nomeUtilizador>
     <tipoUtilizador>aluno</tipoUtilizador>
     <email>aluno@ipcb.pt</email>
-    <eliminar link="eliminaUtilizador.php?nomeUtilizador=aluno&amp;amp;tipoUtilizador=aluno">ELIMINAR</eliminar>
+    <eliminar link="eliminaUtilizador.php?nomeUtilizador=aluno&amp;tipoUtilizador=aluno">ELIMINAR</eliminar>
     <editar link="pgEditaUtilizador.php?id=3">EDITAR</editar>
   </utilizador>
   <utilizador>
@@ -29,7 +29,7 @@
     <nomeUtilizador>jaime</nomeUtilizador>
     <tipoUtilizador>aluno</tipoUtilizador>
     <email>jaime@ipcb.pt</email>
-    <eliminar link="eliminaUtilizador.php?nomeUtilizador=jaime&amp;amp;tipoUtilizador=aluno">ELIMINAR</eliminar>
+    <eliminar link="eliminaUtilizador.php?nomeUtilizador=jaime&amp;tipoUtilizador=aluno">ELIMINAR</eliminar>
     <editar link="pgEditaUtilizador.php?id=8">EDITAR</editar>
   </utilizador>
   <utilizador>
@@ -37,16 +37,15 @@
     <nomeUtilizador>jaimes</nomeUtilizador>
     <tipoUtilizador>aluno</tipoUtilizador>
     <email>jaimes@ipcb.pt</email>
-    <eliminar link="eliminaUtilizador.php?nomeUtilizador=jaimes&amp;amp;tipoUtilizador=aluno">ELIMINAR</eliminar>
+    <eliminar link="eliminaUtilizador.php?nomeUtilizador=jaimes&amp;tipoUtilizador=aluno">ELIMINAR</eliminar>
     <editar link="pgEditaUtilizador.php?id=9">EDITAR</editar>
   </utilizador>
   <utilizador>
     <id>11</id>
-    <nomeUtilizador>jaime3</nomeUtilizador>
-    <tipoUtilizador>visitante nao validado</tipoUtilizador>
+    <nomeUtilizador>jaime4</nomeUtilizador>
+    <tipoUtilizador>utilizador apagado</tipoUtilizador>
     <email>jaime3@gmail.com</email>
-    <validar link="validaVisitante.php?nomeUtilizador=jaime3">VALIDAR</validar>
-    <eliminar link="eliminaUtilizador.php?nomeUtilizador=jaime3&amp;amp;tipoUtilizador=visitante+nao+validado">ELIMINAR</eliminar>
+    <eliminar link="eliminaUtilizador.php?nomeUtilizador=jaime4&amp;tipoUtilizador=utilizador+apagado">ELIMINAR</eliminar>
     <editar link="pgEditaUtilizador.php?id=11">EDITAR</editar>
   </utilizador>
   <utilizador>
@@ -55,7 +54,7 @@
     <tipoUtilizador>visitante nao validado</tipoUtilizador>
     <email>pedro@gmail.com</email>
     <validar link="validaVisitante.php?nomeUtilizador=pedro">VALIDAR</validar>
-    <eliminar link="eliminaUtilizador.php?nomeUtilizador=pedro&amp;amp;tipoUtilizador=visitante+nao+validado">ELIMINAR</eliminar>
+    <eliminar link="eliminaUtilizador.php?nomeUtilizador=pedro&amp;tipoUtilizador=visitante+nao+validado">ELIMINAR</eliminar>
     <editar link="pgEditaUtilizador.php?id=12">EDITAR</editar>
   </utilizador>
 </utilizadores>

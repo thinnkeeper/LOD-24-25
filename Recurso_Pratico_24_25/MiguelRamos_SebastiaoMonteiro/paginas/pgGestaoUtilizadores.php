@@ -97,7 +97,7 @@
                     
                     // Adiciona a ação para eliminar o utilizador
                     $eliminar = $dom -> createElement('eliminar', 'ELIMINAR');
-                    $eliminar -> setAttribute('link', 'eliminaUtilizador.php?nomeUtilizador=' . urlencode($row['nomeUtilizador']) . '&amp;tipoUtilizador=' . urlencode($row['tipoUtilizador']));
+                    $eliminar -> setAttribute('link', 'eliminaUtilizador.php?nomeUtilizador=' . urlencode($row['nomeUtilizador']) . '&tipoUtilizador=' . urlencode($row['tipoUtilizador']));
                     $utilizador -> appendChild($eliminar);
 
                     // Adiciona a ação para editar o utilizador
@@ -108,16 +108,26 @@
                     $utilizadores -> appendChild($utilizador);
                 }
 
-                // Fecha o elemento principal
+                // GuardaFecha o elemento principal
                 $dom -> appendChild($utilizadores);
                 $dom -> save('pgGestaoUtilizadores.xml');
+
+                //Carregar os ficheiros e associar o xsl com o xml
+                $xml = new DOMDocument;
+                $xml->load('pgGestaoUtilizadores.xml');
+                $xsl = new DOMDocument;
+                $xsl->load('pgGestaoUtilizadores.xsl');
+
+                $proc = new XSLTProcessor;
+                $proc->importStyleSheet($xsl);
+
+                echo $proc->transformToXML($xml);
                 }
             ?>
             <div>
             <button><a href='pgNovoUtilizador.php' style="text-decoration: none;">Novo Utilizador</a></button>
             <button><a href='pgGestao.php' style="text-decoration: none;">Voltar</a></button>
             </div>
-
             
         </div>
     </body>
