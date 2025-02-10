@@ -90,23 +90,27 @@
                     
                     // Se o tipo de utilizador for "visitante nao validado", adiciona a ação de validação
                     if ($row['tipoUtilizador'] == "visitante nao validado") {
-                        echo '<acao tipo="validar">' . htmlspecialchars("validaVisitante.php?nomeUtilizador=" . urlencode($row['nomeUtilizador'])) . '</acao>';
+                        $validar = $dom -> createElement('validar', 'VALIDAR');
+                        $validar -> setAttribute('link', 'validaVisitante.php?nomeUtilizador='.urlencode($row['nomeUtilizador']));
+                        $utilizador -> appendChild($validar);
                     }
                     
                     // Adiciona a ação para eliminar o utilizador
-                    echo '<acao tipo="eliminar">' . htmlspecialchars("eliminaUtilizador.php?nomeUtilizador=" . urlencode($row['nomeUtilizador']) . "&amp;tipoUtilizador=" . urlencode($row['tipoUtilizador'])) . '</acao>';
-                    
+                    $eliminar = $dom -> createElement('eliminar', 'ELIMINAR');
+                    $eliminar -> setAttribute('link', 'eliminaUtilizador.php?nomeUtilizador=' . urlencode($row['nomeUtilizador']) . '&amp;tipoUtilizador=' . urlencode($row['tipoUtilizador']));
+                    $utilizador -> appendChild($eliminar);
+
                     // Adiciona a ação para editar o utilizador
-                    echo '<acao tipo="editar">' . htmlspecialchars("pgEditaUtilizador.php?id=" . urlencode($row['id'])) . '</acao>';
-                    
-                    echo '</utilizador>';
+                    $editar = $dom -> createElement('editar', 'EDITAR');
+                    $editar -> setAttribute('link', 'pgEditaUtilizador.php?id=' . urlencode($row['id']));
+                    $utilizador -> appendChild($editar);
+
                     $utilizadores -> appendChild($utilizador);
                 }
 
                 // Fecha o elemento principal
                 $dom -> appendChild($utilizadores);
-                echo '</utilizadores>';
-                
+                $dom -> save('pgGestaoUtilizadores.xml');
                 }
             ?>
             <div>
