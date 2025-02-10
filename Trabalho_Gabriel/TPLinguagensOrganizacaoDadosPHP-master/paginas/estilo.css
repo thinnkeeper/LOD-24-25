@@ -1,0 +1,218 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.button-group a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+.button-group a:hover {
+    background-color: #0056b3;
+}
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+h2 {
+    margin-top: 0;
+}
+
+/* Centralizar o contêiner e itens */
+.form-registo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Tamanho máximo para o formulário */
+    background-color: #f9f9f9; /* Cor de fundo */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-registo h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Estilo para os rótulos */
+.form-registo label {
+    width: 100%;
+    text-align: left; /* Alinha os rótulos à esquerda */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Estilo para os inputs e selects */
+.form-registo input,
+.form-registo select {
+    width: 100%; 
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; 
+}
+
+/* Estilo para o botão de submit */
+.form-registo input[type="submit"] {
+    max-width: 300px; 
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.form-registo input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.form-curso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Tamanho máximo para o formulário */
+    background-color: #f9f9f9; /* Cor de fundo */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-curso label{
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #555555;
+}
+
+.form-curso input[type="text"],
+.form-curso input[type="number"],
+.form-curso textarea,
+.form-curso select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333333;
+    background-color: #fdfdfd;
+}
+
+.form-curso input:focus,
+.form-curso textarea:focus,
+.form-curso select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.form-curso input[type="submit"] {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover no botão */
+.form-curso input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Estilo da mensagem no select */
+.form-curso select option:first-child {
+    color: #999999;
+}
+
+
+@media (max-width: 500px) {
+    .form-registo {
+        width: 90%;
+    }
+}
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    
+}
+table th, table td {
+    border: 2px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    
+}
+table th {
+    background-color: #007bff;
+    color: white;
+    
+}
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.action-buttons a {
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.action-buttons a.edit {
+    background-color: #007bff;
+}
+.action-buttons a.edit:hover {
+    background-color: #0056b3;
+}
+.action-buttons a.cancel {
+    background-color: #dc3545;
+}
+.action-buttons a.cancel:hover {
+    background-color: #c82333;
+}
