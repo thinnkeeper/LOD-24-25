@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inscricoes>
+  <inscricao>
+    <idInscricao>201</idInscricao>
+    <aluno id="3">aluno</aluno>
+    <formacao id="1">Formacao 1</formacao>
+    <data>2024-05-13</data>
+    <estado>Inscrito</estado>
+    <eliminar link="eliminaInscricao.php?idInscricao=201&amp;estado=1">ELIMINAR</eliminar>
+    <editar link="pgEditarInscricao.php?idInscricao=201">EDITAR</editar>
+  </inscricao>
+  <inscricao>
+    <idInscricao>202</idInscricao>
+    <aluno id="3">aluno</aluno>
+    <formacao id="4">Formacao 4</formacao>
+    <data>2024-05-13</data>
+    <estado>Inscrito</estado>
+    <eliminar link="eliminaInscricao.php?idInscricao=202&amp;estado=1">ELIMINAR</eliminar>
+    <editar link="pgEditarInscricao.php?idInscricao=202">EDITAR</editar>
+  </inscricao>
+  <inscricao>
+    <idInscricao>203</idInscricao>
+    <aluno id="3">aluno</aluno>
+    <formacao id="1">Formacao 1</formacao>
+    <data>2024-05-13</data>
+    <estado>Inscrito</estado>
+    <eliminar link="eliminaInscricao.php?idInscricao=203&amp;estado=1">ELIMINAR</eliminar>
+    <editar link="pgEditarInscricao.php?idInscricao=203">EDITAR</editar>
+  </inscricao>
+  <inscricao>
+    <idInscricao>205</idInscricao>
+    <aluno id="8">jaime</aluno>
+    <formacao id="8">FormaXPTO</formacao>
+    <data>2024-06-12</data>
+    <estado>Inscrito</estado>
+    <eliminar link="eliminaInscricao.php?idInscricao=205&amp;estado=1">ELIMINAR</eliminar>
+    <editar link="pgEditarInscricao.php?idInscricao=205">EDITAR</editar>
+  </inscricao>
+</inscricoes>
