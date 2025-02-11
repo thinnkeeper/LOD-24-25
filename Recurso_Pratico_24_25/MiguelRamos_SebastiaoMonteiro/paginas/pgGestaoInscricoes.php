@@ -161,6 +161,17 @@
                 }
                 // GuardaFecha o elemento principal
                 $dom -> save('pgGestaoInscricoes.xml');
+
+                //Carregar os ficheiros e associar o xsl com o xml
+                $xml = new DOMDocument;
+                $xml->load('pgGestaoInscricoes.xml');
+                $xsl = new DOMDocument;
+                $xsl->load('pgGestaoInscricoes.xsl');
+
+                $proc = new XSLTProcessor;
+                $proc->importStyleSheet($xsl);
+
+                echo $proc->transformToXML($xml);
             }
 
             if($_SESSION['tipoUtilizador'] == "3") {
