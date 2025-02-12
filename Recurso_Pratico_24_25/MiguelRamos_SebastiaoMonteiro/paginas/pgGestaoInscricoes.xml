@@ -36,4 +36,13 @@
     <eliminar link="eliminaInscricao.php?idInscricao=205&amp;estado=1">ELIMINAR</eliminar>
     <editar link="pgEditarInscricao.php?idInscricao=205">EDITAR</editar>
   </inscricao>
+  <inscricao>
+    <idInscricao>208</idInscricao>
+    <aluno id="8">jaime</aluno>
+    <formacao id="1">Formacao 1</formacao>
+    <data>2025-02-12</data>
+    <estado>Inscrito</estado>
+    <eliminar link="eliminaInscricao.php?idInscricao=208&amp;estado=1">ELIMINAR</eliminar>
+    <editar link="pgEditarInscricao.php?idInscricao=208">EDITAR</editar>
+  </inscricao>
 </inscricoes>
