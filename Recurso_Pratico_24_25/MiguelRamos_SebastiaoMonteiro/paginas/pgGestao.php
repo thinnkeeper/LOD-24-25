@@ -89,8 +89,23 @@
                     </tr>
 
                 </table>
+                
+                        <?php
+                        if($_SESSION['tipoUtilizador'] >= 1 && $_SESSION['tipoUtilizador'] <= 2) {
+                        ?>
+                            <table border="2" cellpadding="2" cellspacing="2" width="20%" height="20%">
+                                <tr>
+                                    <td align="center">
+                                    <button><a href='exportarXML.php' allign="center" style="text-decoration: none;">Exportar XML</a></button>
+                                    <button><a href='exportarDTD.php' allign="center" style="text-decoration: none;">Exportar DTD</a></button>
+                                    <button><a href='exportarXSD.php' allign="center" style="text-decoration: none;">Exportar XSD</a></button>
+                                </tr>
+                            </table>
+                        <?php
+                        }
+                        ?>
+                    
                 <br>
-
                 <?php
                 }
                 ?>
