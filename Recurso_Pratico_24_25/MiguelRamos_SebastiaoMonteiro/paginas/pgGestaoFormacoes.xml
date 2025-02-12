@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formacoes>
+  <formacao>
+    <codigo>1</codigo>
+    <nome>Formacao 1</nome>
+    <descricao>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis convallis sem, sit amet tristique velit tincidunt et.</descricao>
+    <data>0000-00-00</data>
+    <docente id="2">docente</docente>
+    <horaInicio>16:00:00</horaInicio>
+    <duracao>2h</duracao>
+    <lotacao>20</lotacao>
+    <eliminar link="eliminaFormacao.php?codigoFormacao=1">ELIMINAR</eliminar>
+    <editar link="pgEditarFormacao.php?codigoFormacao=1">EDITAR</editar>
+  </formacao>
+  <formacao>
+    <codigo>4</codigo>
+    <nome>Formacao 4</nome>
+    <descricao>Nam sit amet turpis vel lectus accumsan placerat quis eget ex. Nullam maximus dui eget erat gravida, quis pulvinar ligula suscipit.</descricao>
+    <data>0000-00-00</data>
+    <docente id="2">docente</docente>
+    <horaInicio>10:00:00</horaInicio>
+    <duracao>3h</duracao>
+    <lotacao>18</lotacao>
+    <eliminar link="eliminaFormacao.php?codigoFormacao=4">ELIMINAR</eliminar>
+    <editar link="pgEditarFormacao.php?codigoFormacao=4">EDITAR</editar>
+  </formacao>
+  <formacao>
+    <codigo>5</codigo>
+    <nome>Formacao 5</nome>
+    <descricao>Fusce et ornare mi, vitae finibus libero. Donec sed lectus purus. Integer ultricies hendrerit lobortis.</descricao>
+    <data>0000-00-00</data>
+    <docente id="2">docente</docente>
+    <horaInicio>08:00:00</horaInicio>
+    <duracao>1h</duracao>
+    <lotacao>23</lotacao>
+    <eliminar link="eliminaFormacao.php?codigoFormacao=5">ELIMINAR</eliminar>
+    <editar link="pgEditarFormacao.php?codigoFormacao=5">EDITAR</editar>
+  </formacao>
+  <formacao>
+    <codigo>8</codigo>
+    <nome>FormaXPTO</nome>
+    <descricao>Esta  muito especial.</descricao>
+    <data>2024-06-26</data>
+    <docente id="2">docente</docente>
+    <horaInicio>22:00:00</horaInicio>
+    <duracao>3h</duracao>
+    <lotacao>15</lotacao>
+    <eliminar link="eliminaFormacao.php?codigoFormacao=8">ELIMINAR</eliminar>
+    <editar link="pgEditarFormacao.php?codigoFormacao=8">EDITAR</editar>
+  </formacao>
+</formacoes>
