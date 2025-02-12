@@ -51,7 +51,7 @@
             </div>
         </div>
         <div id="corpo">
-            <?php
+        <?php
             require_once "../basedados/basedados.h";
 
             if ((!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) || $_SESSION['tipoUtilizador'] >= 3) {
@@ -75,33 +75,69 @@
                 }
 
                 $res = mysqli_query($conn , $sql);
-                if (mysqli_num_rows($res) == 0) {
-                    echo "<b>Não existem formações.</b>";
-                }
-                echo "<br>";
-                echo "<table border='1' style='text-align:center;'><tr><th>Código</th><th>Nome</th><th>Descrição</th><th>Data</th><th>Docente</th><th>Hora Inicio</th><th>Duração</th><th>Lotação</th></tr>";
+                
+                $dom = new DOMDocument('1.0','UTF-8');
+                $dom -> formatOutput = true;
+                
+                $formacoes = $dom -> createElement('formacoes');
+                $dom -> appendChild($formacoes);
 
-                    while($row = mysqli_fetch_array($res)){
-                        echo "<tr>";
-                        echo "<td>".$row['codigoFormacao']."</td>";
-                        echo "<td>".$row['nome']."</td>";
-                        echo "<td>".$row['descricao']."</td>";
-                        echo "<td>".$row['data']."</td>";
-                        foreach ($docentes as $docente) {
-                            if ($docente['id'] == $row['docenteID']) {
-                                $docID = $row['docenteID'];
-                                $nomeDoc = $docente['nomeUtilizador'];
-                                echo "<td>[".$docID."] - ".$nomeDoc."</td>";
-                            }
+                while($row = mysqli_fetch_array($res)) {
+                    $formacao = $dom -> createElement('formacao');
+
+                    $codigo = $dom -> createElement('codigo', $row['codigoFormacao']);
+                    $formacao -> appendChild($codigo);
+
+                    $nome = $dom -> createElement('nome', $row['nome']);
+                    $formacao -> appendChild($nome);
+
+                    $descricao = $dom -> createElement('descricao', $row['descricao']);
+                    $formacao -> appendChild($descricao);
+
+                    $data = $dom -> createElement('data', $row['data']);
+                    $formacao -> appendChild($data);
+
+                    foreach ($docentes as $docente) {
+                        if ($docente['id'] == $row['docenteID']) {
+                            $docenteElemento = $dom -> createElement('docente', $docente['nomeUtilizador']);
+                            $docenteElemento -> setAttribute('id', $row['docenteID']);
+                            $formacao -> appendChild($docenteElemento);
                         }
-                        echo "<td>".$row['horaInicio']."</td>";
-                        echo "<td>".$row['duracao']."h</td>";
-                        echo "<td>".$row['lotacao']."</td>";
-                        echo "<td><a href = 'eliminaFormacao.php?codigoFormacao=" .$row['codigoFormacao']. "'> <font color='red'> ELIMINAR </font> </a></td>";
-                        echo "<td><a href = 'pgEditarFormacao.php?codigoFormacao=" .$row['codigoFormacao']. "'> <font color='green'> EDITAR </font> </a></td>";
-                        echo "</tr>";
                     }
-                    echo "</table><br/>";
+
+                    $horaInicio = $dom -> createElement('horaInicio', $row['horaInicio']);
+                    $formacao -> appendChild($horaInicio);
+
+                    $duracao = $dom -> createElement('duracao', $row['duracao'] . 'h');
+                    $formacao -> appendChild($duracao);
+
+                    $lotacao = $dom -> createElement('lotacao', $row['lotacao']);
+                    $formacao -> appendChild($lotacao);
+                    
+                    // Adicionar ações de eliminar e editar
+                    $eliminar = $dom -> createElement('eliminar', 'ELIMINAR');
+                    $eliminar -> setAttribute('link', 'eliminaFormacao.php?codigoFormacao=' . urlencode($row['codigoFormacao']));
+                    $formacao -> appendChild($eliminar);
+
+                    $editar = $dom -> createElement('editar', 'EDITAR');
+                    $editar -> setAttribute('link', 'pgEditarFormacao.php?codigoFormacao=' . urlencode($row['codigoFormacao']));
+                    $formacao -> appendChild($editar);
+
+                    $formacoes -> appendChild($formacao);
+                }
+                
+                $dom -> save('pgGestaoFormacoes.xml');
+                
+                // Carregar os ficheiros e associar o xsl com o xml
+                $xml = new DOMDocument;
+                $xml->load('pgGestaoFormacoes.xml');
+                $xsl = new DOMDocument;
+                $xsl->load('pgGestaoFormacoes.xsl');
+                
+                $proc = new XSLTProcessor;
+                $proc->importStyleSheet($xsl);
+                
+                echo $proc->transformToXML($xml);
             }
             ?>
             <button><a href='pgCriaNovaFormacao.php' style="text-decoration: none;">Criar Formação</a></button>
