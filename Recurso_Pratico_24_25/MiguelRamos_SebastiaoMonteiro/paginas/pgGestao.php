@@ -91,7 +91,7 @@
                 </table>
                 
                         <?php
-                        if($_SESSION['tipoUtilizador'] >= 1 && $_SESSION['tipoUtilizador'] <= 2) {
+                        if($_SESSION['tipoUtilizador'] == 1) {
                         ?>
                             <table border="2" cellpadding="2" cellspacing="2" width="20%" height="20%">
                                 <tr>
