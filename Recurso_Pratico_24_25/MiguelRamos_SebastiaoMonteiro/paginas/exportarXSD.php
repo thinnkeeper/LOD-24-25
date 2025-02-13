@@ -55,7 +55,7 @@
             </xs:element>
         </xs:schema>';
 
-        // Guardar o XSD num arquivo
+        // Guardar o XSD num ficheiro
         $filename = "formacoesLW.xsd";
         file_put_contents($filename, $xsdContent);
 
@@ -65,7 +65,7 @@
         header('Content-Length: ' . filesize($filename));
         readfile($filename);
 
-        // Remover o arquivo após o download
+        // Remover o ficheiro após o download
         // unlink($filename);
     }
 ?>

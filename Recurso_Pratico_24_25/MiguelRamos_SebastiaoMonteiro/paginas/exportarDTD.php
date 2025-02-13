@@ -3,31 +3,41 @@
 
     include("../basedados/basedados.h");
 
-    if ((!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true)) {
+    if ((!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true || $_SESSION['tipoUtilizador'] != "1")) {
         echo "Não estás autenticado! (Sem privilégios para aceder a esta página.)";
         header("refresh:1; url=pgHomepage.php");
     } else {
 
-        // Criar o conteúdo do DTD
-        $dtdContent = "<!ELEMENT formacoesLW (utilizadores, formacoes)>
-        <!ELEMENT utilizadores (utilizador*)>
-        <!ELEMENT utilizador (id, nomeUtilizador, email, tipoUtilizador)>
-        <!ELEMENT id (#PCDATA)>
-        <!ELEMENT nomeUtilizador (#PCDATA)>
-        <!ELEMENT email (#PCDATA)>
-        <!ELEMENT tipoUtilizador (#PCDATA)>
-        <!ELEMENT formacoes (formacao*)>
-        <!ELEMENT formacao (codigoFormacao, nome, descricao, data, docenteID, horaInicio, duracao, lotacao)>
-        <!ELEMENT codigoFormacao (#PCDATA)>
-        <!ELEMENT nome (#PCDATA)>
-        <!ELEMENT descricao (#PCDATA)>
-        <!ELEMENT data (#PCDATA)>
-        <!ELEMENT docenteID (#PCDATA)>
-        <!ELEMENT horaInicio (#PCDATA)>
-        <!ELEMENT duracao (#PCDATA)>
-        <!ELEMENT lotacao (#PCDATA)>";
-
-        // Guardar o DTD num arquivo
+        // Conectar ao banco de dados
+        $query = "SHOW TABLES FROM lwbd";
+        $result = mysqli_query($conn, $query);
+        
+        $dtdContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $dtdContent .= "<!ELEMENT formacoesLW (";
+        
+        $tableElements = [];
+        $elementDefinitions = "";
+        
+        while ($tab = mysqli_fetch_row($result)) {
+            $tableName = $tab[0];
+            $tableElements[] = $tableName;
+            
+            $query2 = "SHOW COLUMNS FROM " . $tableName;
+            $result2 = mysqli_query($conn, $query2);
+            
+            $columnElements = [];
+            while ($tab2 = mysqli_fetch_row($result2)) {
+                $columnElements[] = $tab2[0];
+                $elementDefinitions .= "<!ELEMENT " . $tab2[0] . " (#PCDATA)>\n";
+            }
+            
+            $dtdContent .= "<!ELEMENT " . $tableName . " (" . implode(", ", $columnElements) . ")>\n";
+        }
+        
+        $dtdContent .= implode(", ", $tableElements) . ")>\n";
+        $dtdContent .= $elementDefinitions;
+        
+        // Guardar o DTD num ficheiro
         $filename = "formacoesLW.dtd";
         file_put_contents($filename, $dtdContent);
 
@@ -37,7 +47,7 @@
         header('Content-Length: ' . filesize($filename));
         readfile($filename);
 
-        // Remover o arquivo após o download
+        // Remover o ficheiro após o download
         // unlink($filename);
     }
 ?>
