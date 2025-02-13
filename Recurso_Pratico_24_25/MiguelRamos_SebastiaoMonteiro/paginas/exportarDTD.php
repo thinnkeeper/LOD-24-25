@@ -8,7 +8,7 @@
         header("refresh:1; url=pgHomepage.php");
     } else {
 
-        // Conectar ao banco de dados
+        // Conectar a base de dados
         $query = "SHOW TABLES FROM lwbd";
         $result = mysqli_query($conn, $query);
         
@@ -38,7 +38,7 @@
         $dtdContent .= $elementDefinitions;
         
         // Guardar o DTD num ficheiro
-        $filename = "formacoesLW.dtd";
+        $filename = "exportarDTD.dtd";
         file_put_contents($filename, $dtdContent);
 
         // Download do DTD
