@@ -8,20 +8,20 @@
         header("refresh:1; url=pgHomepage.php");
     } else {
 
-        // Conectar a base de dados
+        // Conectar à base de dados
         $query = "SHOW TABLES FROM lwbd";
         $result = mysqli_query($conn, $query);
-        
+            
         $dtdContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         $dtdContent .= "<!ELEMENT formacoesLW (";
         
         $tableElements = [];
         $elementDefinitions = "";
-        
+            
         while ($tab = mysqli_fetch_row($result)) {
             $tableName = $tab[0];
             $tableElements[] = $tableName;
-            
+                
             $query2 = "SHOW COLUMNS FROM " . $tableName;
             $result2 = mysqli_query($conn, $query2);
             
@@ -30,24 +30,20 @@
                 $columnElements[] = $tab2[0];
                 $elementDefinitions .= "<!ELEMENT " . $tab2[0] . " (#PCDATA)>\n";
             }
-            
+                
             $dtdContent .= "<!ELEMENT " . $tableName . " (" . implode(", ", $columnElements) . ")>\n";
         }
-        
+            
         $dtdContent .= implode(", ", $tableElements) . ")>\n";
         $dtdContent .= $elementDefinitions;
-        
+            
         // Guardar o DTD num ficheiro
         $filename = "exportarDTD.dtd";
         file_put_contents($filename, $dtdContent);
 
-        // Download do DTD
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
-        header('Content-Length: ' . filesize($filename));
-        readfile($filename);
-
         // Remover o ficheiro após o download
         // unlink($filename);
+
+        header("refresh:1; url=pgGestao.php");
     }
 ?>
