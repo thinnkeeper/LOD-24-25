@@ -19,11 +19,11 @@
             $tables[] = $row[0];
         }
         
-        $dtdContent .= "  <!ELEMENT formacoesLW (" . implode(", ", $tables) . ")>\n\n";
+        $dtdContent .= "\t<!ELEMENT formacoesLW (" . implode(", ", $tables) . ")>\n\n";
         
         foreach ($tables as $table) {
-            $dtdContent .= "  <!ELEMENT $table ($table*)>\n";
-            $dtdContent .= "  <!ELEMENT $table (";
+            $dtdContent .= "\t<!ELEMENT $table ($table*)>\n";
+            $dtdContent .= "\t<!ELEMENT $table (";
             
             $query = "DESCRIBE $table";
             $columns_result = mysqli_query($conn, $query);
@@ -35,7 +35,7 @@
             $dtdContent .= implode(", ", $columns) . ")>\n";
             
             foreach ($columns as $column) {
-                $dtdContent .= "  <!ELEMENT $column (#PCDATA)>\n";
+                $dtdContent .= "\t<!ELEMENT $column (#PCDATA)>\n";
             }
             
             $dtdContent .= "\n";
