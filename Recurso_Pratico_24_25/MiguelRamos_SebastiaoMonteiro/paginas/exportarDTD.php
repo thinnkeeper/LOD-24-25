@@ -7,36 +7,42 @@
         echo "Não estás autenticado! (Sem privilégios para aceder a esta página.)";
         header("refresh:1; url=pgHomepage.php");
     } else {
-
-        // Conectar à base de dados
-        $query = "SHOW TABLES FROM lwbd";
-        $result = mysqli_query($conn, $query);
-            
-        $dtdContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $dtdContent .= "<!ELEMENT formacoesLW (";
         
-        $tableElements = [];
-        $elementDefinitions = "";
-            
-        while ($tab = mysqli_fetch_row($result)) {
-            $tableName = $tab[0];
-            $tableElements[] = $tableName;
-                
-            $query2 = "SHOW COLUMNS FROM " . $tableName;
-            $result2 = mysqli_query($conn, $query2);
-            
-            $columnElements = [];
-            while ($tab2 = mysqli_fetch_row($result2)) {
-                $columnElements[] = $tab2[0];
-                $elementDefinitions .= "<!ELEMENT " . $tab2[0] . " (#PCDATA)>\n";
-            }
-                
-            $dtdContent .= "<!ELEMENT " . $tableName . " (" . implode(", ", $columnElements) . ")>\n";
+        $query = "SHOW TABLES";
+        $result = mysqli_query($conn, $query);
+        
+        $dtdContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $dtdContent .= "<!DOCTYPE baseDados [\n";
+        
+        $tables = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $tables[] = $row[0];
         }
+        
+        $dtdContent .= "  <!ELEMENT baseDados (" . implode(", ", $tables) . ")>\n\n";
+        
+        foreach ($tables as $table) {
+            $dtdContent .= "  <!ELEMENT $table ($table*)>\n";
+            $dtdContent .= "  <!ELEMENT $table (";
             
-        $dtdContent .= implode(", ", $tableElements) . ")>\n";
-        $dtdContent .= $elementDefinitions;
+            $query = "DESCRIBE $table";
+            $columns_result = mysqli_query($conn, $query);
+            $columns = [];
+            while ($col = mysqli_fetch_assoc($columns_result)) {
+                $columns[] = $col['Field'];
+            }
             
+            $dtdContent .= implode(", ", $columns) . ")>\n";
+            
+            foreach ($columns as $column) {
+                $dtdContent .= "  <!ELEMENT $column (#PCDATA)>\n";
+            }
+            
+            $dtdContent .= "\n";
+        }
+        
+        $dtdContent .= "]>";
+        
         // Guardar o DTD num ficheiro
         $filename = "exportarDTD.dtd";
         file_put_contents($filename, $dtdContent);
@@ -45,5 +51,7 @@
         // unlink($filename);
 
         header("refresh:1; url=pgGestao.php");
+
+        mysqli_close($conn);
     }
 ?>
