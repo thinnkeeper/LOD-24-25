@@ -19,10 +19,10 @@
             $tables[] = $row[0];
         }
         
-        $dtdContent .= "\t<!ELEMENT formacoesLW (" . implode(", ", $tables) . ")>\n\n";
+        $dtdContent .= "\t<!ELEMENT formacoesLW (" . implode(", tabela_", $tables) . ")>\n\n";
         
         foreach ($tables as $table) {
-            $dtdContent .= "\t<!ELEMENT $table ($table*)>\n";
+            $dtdContent .= "\t<!ELEMENT tabela_$table ($table*)>\n";
             $dtdContent .= "\t<!ELEMENT $table (";
             
             $query = "DESCRIBE $table";

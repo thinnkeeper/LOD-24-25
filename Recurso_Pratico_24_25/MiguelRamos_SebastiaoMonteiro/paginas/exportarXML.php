@@ -11,11 +11,11 @@
     $dom = new DOMDocument('1.0', 'UTF-8');
     $dom->formatOutput = true;
 
-    $root = $dom->createElement('baseDados');
+    $root = $dom->createElement('formacoesLW');
     $dom->appendChild($root);
 
     // Obter utilizadores
-    $utilizadores = $dom->createElement('utilizadores');
+    $utilizadores = $dom->createElement('tabela_utilizador');
     $root->appendChild($utilizadores);
 
     $sql = "SELECT * FROM utilizador";
@@ -31,7 +31,7 @@
     }
 
     // Obter tipos de utilizador
-    $tiposutilizadores = $dom->createElement('tiposUtilizadores');
+    $tiposutilizadores = $dom->createElement('tabela_tipoutilizador');
     $root->appendChild($tiposutilizadores);
 
     $sql = "SELECT * FROM tipoutilizador";
@@ -47,7 +47,7 @@
     }
 
     // Obter formações
-    $formacoes = $dom->createElement('formacoes');
+    $formacoes = $dom->createElement('tabela_formacao');
     $root->appendChild($formacoes);
 
     $sql = "SELECT * FROM formacao";
@@ -63,7 +63,7 @@
     }
 
     // Obter inscrições
-    $inscricoes = $dom->createElement('inscricoes');
+    $inscricoes = $dom->createElement('tabela_inscricao');
     $root->appendChild($inscricoes);
 
     $sql = "SELECT * FROM inscricao";
@@ -79,7 +79,7 @@
     }
 
     // Obter estados das inscrições
-    $estados = $dom->createElement('estadosInscricoes');
+    $estados = $dom->createElement('tabela_estadoinscricao');
     $root->appendChild($estados);
 
     $sql = "SELECT * FROM estadoinscricao";
