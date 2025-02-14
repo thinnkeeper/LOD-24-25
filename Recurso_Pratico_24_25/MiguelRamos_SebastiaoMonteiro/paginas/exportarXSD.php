@@ -34,9 +34,9 @@
             $tables[] = $tableName;
         }
 
-        // Para cada tabela, cria uma definição global de elemento
+        // Para cada tabela, cria um elemento
         foreach ($tables as $tableName) {
-            // Cria o elemento global da tabela
+            // Cria o elemento da tabela
             $tableElement = $dom->createElement("xs:element");
             $tableElement->setAttribute("name", $tableName);
             $formacoesLWSequence->appendChild($tableElement);
@@ -59,8 +59,6 @@
                 $xsdType = "xs:string"; // padrão
                 if (strpos($mysqlType, "int") !== false) {
                     $xsdType = "xs:integer";
-                } elseif (strpos($mysqlType, "float") !== false || strpos($mysqlType, "double") !== false || strpos($mysqlType, "decimal") !== false) {
-                    $xsdType = "xs:decimal";
                 } elseif (strpos($mysqlType, "date") !== false) {
                     $xsdType = "xs:date";
                 }
@@ -72,7 +70,7 @@
                 $tableSequence->appendChild($columnElement);
             }
         }
-        // Gera o XSD
+        // Guarda o XSD
         $xsdContent = $dom->save('exportarXSD.xsd');
 
         header("refresh:1; url=pgGestao.php");
