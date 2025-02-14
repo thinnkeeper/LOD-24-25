@@ -47,9 +47,6 @@
         $filename = "exportarDTD.dtd";
         file_put_contents($filename, $dtdContent);
 
-        // Remover o ficheiro após o download
-        // unlink($filename);
-
         header("refresh:1; url=pgGestao.php");
 
         mysqli_close($conn);

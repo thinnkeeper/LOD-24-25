@@ -8,64 +8,73 @@
         header("refresh:1; url=pgHomepage.php");
     } else {
 
-        // Criar o conteúdo do XSD
-        $xsdContent = '<?xml version="1.0" encoding="UTF-8"?>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-            <xs:element name="formacoesLW">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="utilizadores">
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="utilizador" maxOccurs="unbounded">
-                                        <xs:complexType>
-                                            <xs:sequence>
-                                                <xs:element name="id" type="xs:int"/>
-                                                <xs:element name="nomeUtilizador" type="xs:string"/>
-                                                <xs:element name="email" type="xs:string"/>
-                                                <xs:element name="tipoUtilizador" type="xs:string"/>
-                                            </xs:sequence>
-                                        </xs:complexType>
-                                    </xs:element>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                        <xs:element name="formacoes">
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="formacao" maxOccurs="unbounded">
-                                        <xs:complexType>
-                                            <xs:sequence>
-                                                <xs:element name="codigoFormacao" type="xs:string"/>
-                                                <xs:element name="nome" type="xs:string"/>
-                                                <xs:element name="descricao" type="xs:string"/>
-                                                <xs:element name="data" type="xs:date"/>
-                                                <xs:element name="docenteID" type="xs:int"/>
-                                                <xs:element name="horaInicio" type="xs:time"/>
-                                                <xs:element name="duracao" type="xs:int"/>
-                                                <xs:element name="lotacao" type="xs:int"/>
-                                            </xs:sequence>
-                                        </xs:complexType>
-                                    </xs:element>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:schema>';
+        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom->formatOutput = true;
 
-        // Guardar o XSD num ficheiro
-        $filename = "formacoesLW.xsd";
-        file_put_contents($filename, $xsdContent);
+        $schema = $dom->createElementNS("http://www.w3.org/2001/XMLSchema", "xs:schema");
+        $dom->appendChild($schema);
 
-        // Download do XSD
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
-        header('Content-Length: ' . filesize($filename));
-        readfile($filename);
+        $formacoesLW = $dom->createElement("xs:element");
+        $formacoesLW->setAttribute("name", "formacoesLW");
+        $schema->appendChild($formacoesLW);
 
-        // Remover o ficheiro após o download
-        // unlink($filename);
+        $formacoesLWComplexType = $dom->createElement("xs:complexType");
+        $formacoesLW->appendChild($formacoesLWComplexType);
+
+        $formacoesLWSequence = $dom->createElement("xs:sequence");
+        $formacoesLWComplexType->appendChild($formacoesLWSequence);
+
+        // Obter a lista de tabelas da base de dados
+        $query = "SHOW TABLES FROM lwbd";
+        $result = mysqli_query($conn, $query);
+
+        $tables = [];
+        while ($tab = mysqli_fetch_row($result)) {
+            $tableName = $tab[0];
+            $tables[] = $tableName;
+        }
+
+        // Para cada tabela, cria uma definição global de elemento
+        foreach ($tables as $tableName) {
+            // Cria o elemento global da tabela
+            $tableElement = $dom->createElement("xs:element");
+            $tableElement->setAttribute("name", $tableName);
+            $formacoesLWSequence->appendChild($tableElement);
+
+            // Define o complexType para a tabela
+            $tableComplexType = $dom->createElement("xs:complexType");
+            $tableElement->appendChild($tableComplexType);
+
+            // Cria a sequência que conterá os elementos (colunas) da tabela
+            $tableSequence = $dom->createElement("xs:sequence");
+            $tableComplexType->appendChild($tableSequence);
+
+            // Obter as colunas da tabela
+            $query2 = "SHOW COLUMNS FROM " . $tableName;
+            $result2 = mysqli_query($conn, $query2);
+            while ($column = mysqli_fetch_assoc($result2)) {
+                $columnName = $column['Field'];
+                $mysqlType = $column['Type'];
+                // Mapeamento de tipos MySQL para XSD
+                $xsdType = "xs:string"; // padrão
+                if (strpos($mysqlType, "int") !== false) {
+                    $xsdType = "xs:integer";
+                } elseif (strpos($mysqlType, "float") !== false || strpos($mysqlType, "double") !== false || strpos($mysqlType, "decimal") !== false) {
+                    $xsdType = "xs:decimal";
+                } elseif (strpos($mysqlType, "date") !== false) {
+                    $xsdType = "xs:date";
+                }
+
+                // Cria o elemento correspondente à coluna
+                $columnElement = $dom->createElement("xs:element");
+                $columnElement->setAttribute("name", $columnName);
+                $columnElement->setAttribute("type", $xsdType);
+                $tableSequence->appendChild($columnElement);
+            }
+        }
+        // Gera o XSD
+        $xsdContent = $dom->save('exportarXSD.xsd');
+
+        header("refresh:1; url=pgGestao.php");
     }
 ?>
