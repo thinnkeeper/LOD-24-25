@@ -12,14 +12,14 @@
         $result = mysqli_query($conn, $query);
         
         $dtdContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $dtdContent .= "<!DOCTYPE baseDados [\n";
+        $dtdContent .= "<!DOCTYPE formacoesLW [\n";
         
         $tables = [];
         while ($row = mysqli_fetch_array($result)) {
             $tables[] = $row[0];
         }
         
-        $dtdContent .= "  <!ELEMENT baseDados (" . implode(", ", $tables) . ")>\n\n";
+        $dtdContent .= "  <!ELEMENT formacoesLW (" . implode(", ", $tables) . ")>\n\n";
         
         foreach ($tables as $table) {
             $dtdContent .= "  <!ELEMENT $table ($table*)>\n";
